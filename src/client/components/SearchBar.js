@@ -11,29 +11,42 @@ import './SearchBar.styl'
  */
 const SearchBar = (props) => {
   let responseElem = null
-  let buttonClass = cx({disabled: props.isWorking})
+  let popularButtonClass = cx({disabled: props.isWorking})
+  let searchButtonClass = cx('searchButton', {disabled: props.isWorking})
 
   if (props.isWorking) {
-    responseElem = <span>Loading...</span>
+    responseElem = <span>{props.showingPopular ? 'Loading most popular...' : `Searching for '${props.searchTerm}' ...`}</span>
   } else  {
     if (props.error) {
       responseElem = <span className='error'>Error: {props.error}</span>
     } else if (props.totalResults >= 0) {
-      responseElem = <span className='success'>Success: {props.totalResults} found</span>
+      if (props.showingPopular) {
+        responseElem = <span className='success'>Showing top {props.results.length} movies</span>
+      } else if (props.totalResults > props.results.length) {
+        responseElem = <span className='success'>Showing first {props.results.length} of {props.totalResults} movies matching {props.searchTerm}</span>
+      } else {
+        responseElem = <span className='success'>Showing all {props.results.length} movies matching {props.searchTerm}</span>
+      } 
     }
   }
 
   return <div className='SearchBar-container'>
-    <div className='response'>{responseElem}</div>
     <input 
+      className='searchBox'
       type='text' 
-      placeholder='Search for something...'
+      placeholder='Search for a movie...'
       name='searchTerm'
       value={props.searchTerm} 
       onChange={e => props.onSearchTermChanged(e)} />
-    <button className={buttonClass} disabled={props.isWorking} onClick={() => props.onSearchClicked(props.searchTerm)}>
-      Search
+    <button className={searchButtonClass} disabled={props.isWorking} onClick={() => props.onSearchClicked(props.searchTerm)}>
+      <i className="fa fa-search" aria-hidden="true"></i>
     </button>
+
+    <button className={popularButtonClass} disabled={props.isWorking} onClick={() => props.onGetPopularClicked(1)}>
+      Show Most Popular
+    </button>
+
+    <div className='response'>{responseElem}</div>
   </div>
 }
 
@@ -42,9 +55,11 @@ const SearchBar = (props) => {
  */
 SearchBar.propTypes = {
   onSearchClicked: PropTypes.func.isRequired,
+  onGetPopularClicked: PropTypes.func.isRequired,
   onSearchTermChanged: PropTypes.func.isRequired,
   isWorking: PropTypes.bool.isRequired,
-  totalResults: PropTypes.number
+  totalResults: PropTypes.number,
+  results: PropTypes.array
 }
 
 export default SearchBar

@@ -8,7 +8,10 @@ import Loader from './Loader'
 export default class MovieList extends Component {
   static propTypes = {
     isWorking: PropTypes.bool.isRequired,
-    results: PropTypes.array.isRequired
+    results: PropTypes.array.isRequired,
+    movieInView: PropTypes.object,
+    onShowMovieDetail: PropTypes.func.isRequired,
+    onHideMovieDetail: PropTypes.func.isRequired
   }
 
   render() {
@@ -23,10 +26,17 @@ export default class MovieList extends Component {
       contents = <Loader />
     } else if (this.props.results.length > 0) {
       let results = this.props.results
+      let { onShowMovieDetail, onHideMovieDetail, movieInView }= this.props
+
 
       // Map each movie object to a MovieItem component
       contents = <ul className='MovieList-container'>
-        {results.map((movie, id) => <li key={id}><MovieItem {...movie} /></li>)}
+        {results.map((movie, id) => <li key={id}>
+            <MovieItem {...movie} 
+              movieInView={movieInView}
+              onShowMovieDetail={onShowMovieDetail}
+              onHideMovieDetail={onHideMovieDetail} />
+        </li>)}
       </ul>
     }
     

@@ -16,5 +16,10 @@ export const getSearchResults = (searchTerm = '', page = 1) => {
   .then(response => response.body)
 }
 
+export const getPopular = (page = 1) => {
+  return get(`/api/0/popular?page=${page}`)
+  .then(response => response.body)
+}
+
 
 

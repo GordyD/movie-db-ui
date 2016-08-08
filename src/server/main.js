@@ -22,6 +22,8 @@ app.use(require('serve-static')(path.join(__dirname, 'build')))
  */
 app.get('/api/0/search', api.search);
 
+app.get('/api/0/popular', api.popular);
+
 app.get('/favicon.ico', (req, res) => res.sendFile(path.join(__dirname, 'images', 'favicon.ico')));
 
 /**

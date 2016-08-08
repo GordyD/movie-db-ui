@@ -7,7 +7,7 @@
 body
   width 100vw
   font-size 100%
-  background-color color-white
+  background-color color-darkest
   font-family 'PT Sans', Arial, sans-serif
   
 
@@ -24,19 +24,17 @@ button, .button, input, textarea, select
   border 1px solid darken(color-gray, 15)
   text-decoration none
   transition border 0.5s, box-shadow 0.5s
-  
-  &:focus
-    border 1px solid darken(color-gray, 35)
-    box-shadow  0 0 3px color-light
 
 button, .button
-  background-color lighten(color-lightest, 50)
-  color color-black
+  background-color color-black
+  color color-light
+  border 1px solid color-lightest
   cursor pointer
   
   &:hover
-    background-color lighten(color-lightest, 40)
-    border 1px solid darken(color-gray, 25)
+    background-color color-dark
+    border 1px solid lighten(color-lightest, 10)
+    box-shadow  0 0 3px color-light
 
   &.disabled
     background-color lighten(color-gray, 50)
@@ -44,10 +42,7 @@ button, .button
 
 input, textarea, select
   color color-normal
-  
-  &:focus
-    border 1px solid color-darkest
-    box-shadow  0 0 3px color-light
+  border color-lightest 1px solid
 
 *:focus
   outline none

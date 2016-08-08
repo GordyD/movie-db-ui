@@ -1,21 +1,38 @@
 @import '../variables.styl'
 
 .SearchBar-container
-  width 100%
-  background-color lighten(color-normal, 10)
-  margin 10px 0
+  display table
+  margin 10px auto
   padding 10px
+  color color-white
   
   .error
     color red
     font-weight bold
     
   .success 
-    color color-darkest
+    color color-normal
   
   .response
-    margin-bottom 10px
+    margin-top 10px
+    text-align center
     
   label
     margin 0 10px
+    
+  button, input
+    font-size 1em
+    
+  input.searchBox
+    border-bottom-right-radius 0px
+    border-top-right-radius 0px
+    min-width 190px
+    
+  button
+    margin-right 10px
+  
+    &.searchButton
+      border-left none
+      border-bottom-left-radius 0px
+      border-top-left-radius 0px
   
