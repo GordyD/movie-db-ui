@@ -4,6 +4,8 @@ This is a React application for searching for movies from the Movie DB
 
 This app is built using React/Redux in ES6 with a Node.js backend.
 
+Circle CI is used for CI on this procject. Status: [![CircleCI](https://circleci.com/gh/GordyD/movie-db-ui.svg?style=svg)](https://circleci.com/gh/GordyD/movie-db-ui)
+
 ### Set-up
 
 *N.B You will need to ensure you have node 6+ on your machine.*
